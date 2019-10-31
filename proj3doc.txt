@@ -1,0 +1,78 @@
+The program starts with some basic documentation, which includes the filename,
+a short description, the name of the compiler used, and a modification history.
+The header files follow, and include iostream, fstream, iomanip for setprecision(),
+and the proj3.h header file.
+
+The proj3.h file declares both the RentalCar class and the RentalAgency struct.
+
+Back in proj3.cpp: The std:: namespace is used, and the four function prototypes
+required by the project 3 pdf are declared, along with the Set and Get methods,
+the EstimateCost and PrintData functions, and the default and parameterized
+constructors for the RentalCar class. Sizteen more function prototypes are declared,
+and the main function is implemented.
+
+main(): Only calls UserMenu(), then returns 0.
+
+UserMenu(): Declares the array of objects of the RentalAgency struct, using the
+NUM_OF_AGENCIES constant. A while() loop is opened, which continues as long as
+the continuemenu variable is true. The continuemenu variable is only made false
+if the user chooses option 6 when prompted. The DisplayUserMenu() funtion is called,
+which is self-explanatory, and the cin object is used to get the user's choice.
+The choice variable is passed into a switch, with cases 1, 2, 3, 4, 5, 6, and default.
+The default case calls my Error() function, then goes back to the beginning of the
+while() loop. Case 1 sets a bool to the return value of the FileInput() function.
+
+FileInput(): A pointer to the first RentalAgency object in its array is passed into
+this function. This function calls the UserInputFileName() function.
+
+UserInputFileName(): Uses cin to input a char array, then uses myStringCopy to copy
+that char array onto the filename variable.
+
+Back in FileInput(): Calls OpenInputFile which returns true if the file is opened,
+false if the file is not opened. A RentalAgency object is created and used to read
+the data for each agency using the ReadRentalAgencyData() function.
+
+ReadRentalAgencyData(): Creates a RentalAgency object and a RentalCar object. Uses
+the fstream operator to read in the name of the agency, then calls ReadZipcode().
+
+ReadZipcode(): Inputs a five digit array from the file, then parses it.
+
+Back in ReadRentalAgencyData(): Uses a for() loop to input the data for each car.
+Calls ReadRentalCarData() and increments a pointer to the agency.inventory each time
+the for() loops.
+
+ReadRentalCarData(): Sets up temperary variables for each variable in RentalCar,
+initializes a RentalCar object using those variables, then returns that object.
+
+Back in UserMenu(): All of the agency data has now been inputted from the file,
+and case 2 should be chosen, which calls the PrintAgencyData() function.
+
+PrintAgencyData(): Pointers to the first car object in agencydata and to the first
+int in zipcode are used here. for() loops are used to loop through each object, and
+the pointers (including the RentalAgency pointer passed in) are used to print the
+data stored in the objects.
+
+Back in UserMenu(): Data has been printed to console. The user should pick case 3,
+where the EstimateRentalCost() function is called.
+
+EstimateRentalCost(): Initializes a RentalAgency object and a RentalCar object using
+AgencyChoice(), which prints a list of the agencies to the console, from which the
+user can select one, and that choice is used in CarChoice(), which prints a list of
+the cars in the chosen agency and lets the user pick one. The user is also asked for
+how many days they would like to rent the selected car, then prints the cost as given
+by the RentalCar EstimateCost() method.
+
+Back in UserMenu(): A total cost for a selected car from a selected agency has been
+printed. Now the user should choose case 4, which calls the ShowMostExpensiveCar() func.
+
+ShowMostExpensiveCar(): This function cycles through the data for the cars within each
+agency using for() loops, and sets a RentalCar object to whichever costs the most per day,
+then prints the data for that car.
+
+Back in UserMenu(): The data for the most expensive car available has been printed, and the
+user should now select case 5, calling PrintAvailableCarsToFile(), which opens an output
+file using a user given filename, and outputs the data almost exactly the same way it was
+inputted, while only printing data for the cars that are available.
+
+Back in UserMenu(): The data for available cars has been outputted, and the user should
+pick case 6 to end the program.
