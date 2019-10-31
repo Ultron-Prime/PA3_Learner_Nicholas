@@ -1,2 +1,2 @@
 # PA3_Learner_Nicholas
-proj3 for CS 202
+Third Project for CS 202
